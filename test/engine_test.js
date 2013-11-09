@@ -19,7 +19,7 @@ describe('engine', function() {
     });
 
     describe('stop', function() {
-        it('should destroy conference', function(done) {
+        it.skip('should destroy conference', function(done) {
             var data1 = {id: '1'};
             var data2 = {id: '2'};
             var data3 = {id: '3'};
