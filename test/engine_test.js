@@ -38,4 +38,10 @@ describe('engine', function() {
             });
         });
     });
+
+    describe('step', function() {
+        it('should return positions of all people', function(done) {
+            return done();
+        });
+    });
 });
