@@ -67,8 +67,7 @@ var firstTime = function(thing) {
 };
 
 var changedType = function(thing) {
-  $('.ticker > h2').text('oh no, they got ' + state.markers[thing.id].thing.name + '...');
-  console.log(state.markers[thing.id].thing.name + ' has become a zombie');
+  $('.ticker > h2').text('Oh no, they got ' + state.markers[thing.id].thing.name + '...')
   $('#l' + thing.id).attr('class', thing.type);
   $('#i' + thing.id).attr('src', getImgSrc(thing));
   state.map.removeLayer(state.markers[thing.id]);
