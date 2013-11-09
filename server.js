@@ -1,5 +1,6 @@
 var express = require('express'),
   app = express(),
+  routes = require('./lib/routes'),
   server = require('http').createServer(app),
   io = require('socket.io').listen(server);
 
@@ -12,13 +13,7 @@ app.use(express.static(__dirname + '/static'));
 app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname + '/views');
 
-app.get('/', function(req, res) {
-  res.redirect('/conference/nodeconfeu/2013/user');
-});
-
-app.get('/conference/:slug/:year/:user', function(req, res) {
-  res.render('index.html', req.params);
-});
+routes.init(app);
 
 server.listen(port, function(e) {
   if(e) {
