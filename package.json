@@ -11,10 +11,12 @@
     "url": "git@github.com:nko4/0x.git"
   },
   "dependencies": {
+    "async": "*",
     "nko": "*",
     "ejs": "*.*.*",
     "express": "*.*.*", 
-    "socket.io": "*.*.*"
+    "socket.io": "*.*.*",
+    "underscore": "*.*.*"
   },
   "devDependencies": {
     "mocha": "*",

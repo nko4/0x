@@ -6,12 +6,12 @@ module.exports = function(grunt) {
       files: ['gruntfile.js', './*.js', 'test/*.js'],
     },
     watch: {
-      files: ['<%= jshint.files %>'],
+      files: ['*.js', '**/*.js'],
       tasks: ['jshint', 'cafemocha']
     },
     cafemocha: {
       tests: {
-        src: 'test/**/*.js',
+        src: ['test/**/*.js'],
         options: {
             reporter: 'spec',
             growl: true
