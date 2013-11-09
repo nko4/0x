@@ -36,7 +36,7 @@ describe('store', function() {
     store.getConference(conference, function(e, d) {
       assert(!e);
       assert.equal(d.conference.id, 'jsconfeu:2013');
-      assert.equal(d.attendees.length, 104);
+      assert.equal(d.attendees.length, 82);
       assert.equal(d.conference.location.lat, 52.5106);
       assert.equal(d.conference.location.lng, 13.4287);
       return done(e);

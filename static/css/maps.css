@@ -22,17 +22,23 @@ div.controls {
   padding: 5px;
   width: 20%;
   height: 95%; 
+  overflow: auto;
   background-color:rgba(0, 0, 0, 0.8);
   top: 5px;
   right: 5px;
 }
 li {
- font-size: 15px;
+ font-size: 13px;
 }
-li.n {
+li {
   color: white;
 }
-
-li.z {
+li > img {
+  height: 20px;
+  width: 20px;
+  margin-right: 10px;
+}
+li.zombie { 
+  //color: #8A0707;
   text-decoration:line-through;
 }
