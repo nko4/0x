@@ -1,6 +1,7 @@
 var state = {
   map: {},
   details: {},
+  things: {},
   markers: {},
   socket: {}
 };
@@ -21,19 +22,25 @@ var getIcon = function(thing) {
 
 var addToList = function(thing) {
   thing.type = thing.type || 'human';
+  state.things[thing.id] = thing;
   $('#list').append('<li class="' + thing.type + '" id="l' + thing.id + '"><img id="i' + thing.id + '" src="' + getImgSrc(thing) + '"></img>' + thing.name + '</li>');
 };
 
 var firstTime = function(thing) {
   console.log('firsttime: ' + thing.id);
+  thing.name = state.things[thing.id].name;
   var marker;
   if (thing.type == 'zombie' || thing.type == 'human') {
     marker = L.marker([thing.lat, thing.lng], {
-      icon: getIcon(thing)
+      icon: getIcon(thing),
+      title: thing.name
     });
   } else {
+    //todo set draggable based upon id
+    //state.socket.socket.sessionid
     marker = L.marker([thing.lat, thing.lng], {
-      draggable: true
+      draggable: true,
+      title: thing.type
     });
 
     marker.on('dragstart', function(e) {
@@ -60,7 +67,7 @@ var firstTime = function(thing) {
 };
 
 var changedType = function(thing) {
-  console.log(thing.id + ' has become a zombie');
+  console.log(state.markers[thing.id].thing.name + ' has become a zombie');
   $('#l' + thing.id).attr('class', thing.type);
   $('#i' + thing.id).attr('src', getImgSrc(thing));
   state.map.removeLayer(state.markers[thing.id]);
@@ -124,7 +131,6 @@ function addBrains() {
 };
 
 $(function() {
-  //state.socket.socket.sessionid
   state.socket = io.connect();
   state.socket.on('connect', function() {
     state.socket.on('details', details);
