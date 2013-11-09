@@ -16,6 +16,8 @@ describe('store', function() {
       assert(!e);
       assert.equal(d.conference.id, 'nodeconfeu:2013');
       assert.equal(d.attendees.length, 42);
+      assert.equal(d.conference.location.lat, 52.5106);
+      assert.equal(d.conference.location.lng, 13.4287);
       return done(e);
     });
   });
@@ -28,9 +30,9 @@ describe('store', function() {
     store.getConference(conference, function(e, d) {
       assert(!e);
       assert.equal(d.conference.id, 'jsconfeu:2013');
-      assert.equal(d.conference.lat, 52.5106);
-      assert.equal(d.conference.lng, 13.4287);
       assert.equal(d.attendees.length, 104);
+      assert.equal(d.conference.location.lat, 52.5106);
+      assert.equal(d.conference.location.lng, 13.4287);
       return done(e);
     });
   });
