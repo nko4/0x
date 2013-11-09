@@ -1,10 +1,16 @@
+<!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
+    <!--[if lte IE 8]>
+       <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
+    <![endif]-->
+    <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body> 
-    <h1>zombies at my conference</h1> 
-    <iframe src="http://nodeknockout.com/iframe/0x" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>
-
+    <div id="map"></div>
+    <!-- scripts -->
+    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var conference = {
