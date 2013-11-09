@@ -19,6 +19,7 @@ var getIcon = function(thing) {
 }
 
 var addToList = function(thing) {
+  thing.type = thing.type || 'human';
   $('#list').append('<li class="' + thing.type + '" id="l' + thing.id + '"><img id="i'+ thing.id + '" src="' + getImgSrc(thing) + '"></img>' + thing.name + '</li>');
 };
 
@@ -30,7 +31,10 @@ var stepOne = function(thing) {
     marker.thing = thing;
     state.markers[thing.id] = marker;
     state.markers[thing.id].addTo(state.map);
+    $('#l' + thing.id).attr('class', thing.type);
+    $('#i' + thing.id).attr('src', getImgSrc(thing));
   } else if (state.markers[thing.id].thing.type !== thing.type) {
+    console.log(thing.id + ' has become a zombie');
     $('#l' + thing.id).attr('class', thing.type);
     $('#i' + thing.id).attr('src', getImgSrc(thing));
     state.map.removeLayer(state.markers[thing.id]);
