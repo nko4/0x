@@ -18,20 +18,20 @@ describe('Person', function() {
     describe('step', function() {
         it('should change location correctly', function() {
             var p = new Person('TEST', 0, 0);
-            p.acceleration = new vector(1,2);
+            p.acceleration = new vector(1, 2);
             p.step();
-            assert.deepEqual(p.location, new vector(1,2));
+            assert.deepEqual(p.location, new vector(1, 2));
         });
     });
 
     describe('applyBehaviours', function() {
         it('should call each behaviour', function(done) {
             var p = new Person('TEST', 1, 2);
-            var stub = sinon.stub().returns(new vector(1, 2));
+            var stub = sinon.stub().yields(null, new vector(1, 2));
             p.getBehaviours = function() {
                 return [stub];
             };
-            p.applyBehaviours(function(e) {
+            p.applyBehaviours(null, function(e) {
                 assert(stub.calledOnce);
                 return done();
             });
@@ -39,16 +39,19 @@ describe('Person', function() {
     });
 
     describe('getBehaviours', function() {
-        it('should have the random behaviour', function() {
+        it('should have the random behaviour', function(done) {
             var p = new Person('TEST', 1, 2);
             var behaviours = p.getBehaviours();
             assert.equal(behaviours.length, 1);
-            var vector = behaviours[0]();
-            var max = 10;
-            assert(vector.x >= -1 * max);
-            assert(vector.x <= max);
-            assert(vector.y >= -1 * max);
-            assert(vector.y <= max);
+
+            behaviours[0](null, null, function(e, force) {
+                var max = 10;
+                assert(force.x >= -1 * max);
+                assert(force.x <= max);
+                assert(force.y >= -1 * max);
+                assert(force.y <= max);
+                return done();
+            });
         });
-    }); 
+    });
 });
