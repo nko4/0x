@@ -11,7 +11,15 @@ var stepOne = function(thing) {
 
   var attendee = thing;
   if(!state.markers[attendee.id]) {
-    state.markers[attendee.id] = L.marker([attendee.lat, attendee.lng]);
+    var icon = L.icon({
+      iconUrl: '/heads/' + attendee.id + '-n.jpg', 
+      iconSize: [25, 25],
+      iconAnchor: [25, 13],
+      title: attendee.name
+    });
+    
+    var marker = L.marker([attendee.lat, attendee.lng], {icon: icon});
+    state.markers[attendee.id] = marker;
     state.markers[attendee.id].addTo(state.map);
   } else {
     state.markers[attendee.id].setLatLng([attendee.lat, attendee.lng]);
