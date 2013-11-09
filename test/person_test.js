@@ -44,10 +44,11 @@ describe('Person', function() {
             var behaviours = p.getBehaviours();
             assert.equal(behaviours.length, 1);
             var vector = behaviours[0]();
-            assert(vector.x >= -10);
-            assert(vector.x <= 10);
-            assert(vector.y >= -10);
-            assert(vector.y <= 10);
+            var max = 10;
+            assert(vector.x >= -1 * max);
+            assert(vector.x <= max);
+            assert(vector.y >= -1 * max);
+            assert(vector.y <= max);
         });
     }); 
 });
