@@ -41,6 +41,7 @@ describe('Conference', function() {
             var c = new Conference();
             c.init(data, function() {
                 assert.equal(c.people.length, 1);
+                assert.equal(c.people[0].name, 'PERSON1');
                 return done();
             });
         });
@@ -92,10 +93,10 @@ describe('Conference', function() {
                 // EPSG:3857
                 var oxX = 5761184.398718763;
                 var oxY = -138013.54173531875;
-                assert(c.people[0].x < oxX + xBoundary);
-                assert(c.people[0].x > oxX - xBoundary);
-                assert(c.people[0].y < oxY + yBoundary);
-                assert(c.people[0].y > oxY - yBoundary);
+                assert(c.people[0].location.x < oxX + xBoundary);
+                assert(c.people[0].location.x > oxX - xBoundary);
+                assert(c.people[0].location.y < oxY + yBoundary);
+                assert(c.people[0].location.y > oxY - yBoundary);
                 return done();
             });
         });
