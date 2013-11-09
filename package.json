@@ -15,11 +15,13 @@
     "nko": "*",
     "ejs": "*.*.*",
     "express": "*.*.*", 
+    "proj4" : "*.*.*",
     "socket.io": "*.*.*",
     "underscore": "*.*.*"
   },
   "devDependencies": {
     "mocha": "*",
+    "sandboxed-module": "*",
     "sinon": "*",
     "grunt": "~0.4.1",
     "grunt-contrib-jshint": "~0.6.0",

@@ -1,5 +1,18 @@
-var assert = require('assert'),
-    engine = require('../lib/engine');
+var sandbox = require('sandboxed-module'),
+    assert = require('assert'),
+    sinon = require('sinon');
+
+var Conference = function() {};
+Conference.prototype.init = function(data, done) {
+    this.id = data.id;
+    return done();
+};
+
+var engine = sandbox.require('../lib/engine', {
+    requires: {
+        './conference': Conference
+    }
+});
 
 describe('engine', function() {
     beforeEach(function() {
@@ -16,10 +29,14 @@ describe('engine', function() {
                 return done();
             });
         });
+
+        it.skip('should not create a new conference if one has already been started with that id', function(done) {
+            return done('TODO');
+        });
     });
 
     describe('stop', function() {
-        it.skip('should destroy conference', function(done) {
+        it('should destroy conference', function(done) {
             var data1 = {id: '1'};
             var data2 = {id: '2'};
             var data3 = {id: '3'};
