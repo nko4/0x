@@ -10,11 +10,14 @@ html, body, #map {
 }
 
 div.header {
-  padding: 5px;
-  background-color:rgba(0, 0, 0, 0.2);
+  padding: 0;
   width: 70%;
   top: 5px;
   left: 50px;
+}
+
+.header > h1 {
+  color: rgba(138, 7, 7, 0.8);
 }
 
 div.controls {
@@ -27,10 +30,11 @@ div.controls {
   right: 5px;
 }
 li {
- font-size: 13px;
 }
 li {
   color: white;
+  font-family: 'Jolly Lodger', cursive;
+  font-size: 20px;
 }
 li > img {
   height: 20px;
