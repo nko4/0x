@@ -1,34 +1,17 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Zombies at my Conference: <%= slug %> <%= year %></title>
+    <title>Zombies at my Conference</title>
     <link href='http://fonts.googleapis.com/css?family=Creepster' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Nosifer">
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.css" />
-    <!--[if lte IE 8]>
-       <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.ie.css" />
-    <![endif]-->
     <link rel="stylesheet" href="/css/styles.css" />
   </head>
   <body> 
-    <div id="map"></div>
     <h1>zombies at my conference</h1>
-    <h2><%= slug %> <%= year %></h2>
-    <div class="controls">
-      <b>Attendees</b>
-      <ul>
-      </ul>
-      <b>Influencers</b>
-    </div>
-    <!-- scripts -->
-    <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>
-    <script src="/socket.io/socket.io.js"></script>
-    <script>
-      var conference = {
-        slug: '<%= slug %>',
-        year: '<%= year %>'
-      };
-    </script>
-    <script src="/js/client.js"></script>
+    <ul>
+      <li><a href="/conference/nodeconfeu/2013/unknown?lat=52.25350&lng=-7.05934">NodeConf EU 2013</a></li>
+      <li><a href="/conference/jsconfeu/2013/unknown">JSConf EU 2013</a></li>
+      <li><a href="/conference/gbnc/2013/unknown">Great British Node Conference 2013</a></li>
+    </ul>
   </body>
 </html>
