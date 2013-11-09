@@ -18,6 +18,7 @@
     "express": "*.*.*", 
     "proj4" : "*.*.*",
     "socket.io": "*.*.*",
+    "vector2d-lib": "*.*.*",
     "underscore": "*.*.*"
   },
   "devDependencies": {

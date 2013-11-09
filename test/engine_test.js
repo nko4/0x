@@ -4,7 +4,7 @@ var sandbox = require('sandboxed-module'),
 
 var Conference = function() {};
 Conference.prototype.init = function(data, done) {
-    this.id = data.id;
+    this.id = data.conference.id;
     return done();
 };
 
@@ -24,7 +24,9 @@ describe('engine', function() {
     describe('start', function() {
         it('should create new conference', function(done) {
             engine.start({
-                id: 'TEST'
+                conference: {
+                    id: 'TEST'
+                }
             }, function(e) {
                 assert.equal(Object.keys(engine.conferences).length, 1);
                 assert(engine.conferences.TEST);
@@ -40,13 +42,21 @@ describe('engine', function() {
     describe('stop', function() {
         it('should destroy conference', function(done) {
             var data1 = {
-                id: '1'
+                conference: {
+                    id: '1'
+                }
             };
+
             var data2 = {
-                id: '2'
+                conference: {
+                    id: '2'
+                }
             };
+
             var data3 = {
-                id: '3'
+                conference: {
+                    id: '3'
+                }
             };
 
             engine.start(data1, function() {
