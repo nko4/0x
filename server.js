@@ -10,6 +10,7 @@ require('nko')('OsOQBZoKPwLCYTav');
 
 app.use(express.static(__dirname + '/static'));
 app.engine('html', require('ejs').renderFile);
+app.set('views', __dirname + '/views');
 
 app.get('/', function(req, res) {
   res.redirect('/conference/nodeconfeu/2013/user');
