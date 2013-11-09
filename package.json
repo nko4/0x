@@ -18,6 +18,7 @@
     "ejs": "*",
     "express": "*",
     "node-uuid": "*", 
+    "perlin-noise" : "*",
     "proj4" : "*",
     "request": "*",
     "socket.io": "*",
