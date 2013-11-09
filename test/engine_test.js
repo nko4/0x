@@ -2,6 +2,8 @@ var sandbox = require('sandboxed-module'),
     assert = require('assert'),
     sinon = require('sinon');
 
+var engine = require('../lib/engine');
+
 var Conference = function() {};
 Conference.prototype.init = function(data, done) {
     this.id = data.conference.id;
@@ -75,23 +77,30 @@ describe('engine', function() {
     });
 
     describe('step', function() {
-        it('should return positions of all people in requested conference', function(done) {
+        it('should call getThings and step on requested conference', function(done) {
             var stub1 = sinon.stub().yields();
+            var stub11 = sinon.stub().yields();
             var stub2 = sinon.stub().yields();
+            var stub22 = sinon.stub().yields();
 
             engine.conferences.ID1 = {
-                getThings: stub1
+                getThings: stub1,
+                step: stub11
             };
 
             engine.conferences.ID2 = {
-                getThings: stub2
+                getThings: stub2,
+                step: stub22
             };
 
             engine.step('ID1', function(e, data) {
                 assert(stub1.calledOnce);
+                assert(stub11.calledOnce);
                 assert(!stub2.called);
+                assert(!stub22.called);
                 return done();
             });
         });
     });
+    
 });

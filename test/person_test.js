@@ -16,14 +16,21 @@ describe('Person', function() {
     });
 
     describe('step', function() {
-
+        it('should change location correctly', function() {
+            var p = new Person('TEST', 0, 0);
+            p.acceleration = new vector(1,2);
+            p.step();
+            assert.deepEqual(p.location, new vector(1,2));
+        });
     });
 
     describe('applyBehaviours', function() {
         it('should call each behaviour', function(done) {
             var p = new Person('TEST', 1, 2);
-            var stub = sinon.stub();
-            p.getBehaviours = function() { return [stub]; }; 
+            var stub = sinon.stub().returns(new vector(1, 2));
+            p.getBehaviours = function() {
+                return [stub];
+            };
             p.applyBehaviours(function(e) {
                 assert(stub.calledOnce);
                 return done();

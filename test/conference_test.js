@@ -1,8 +1,29 @@
 var assert = require('assert'),
     Conference = require('../lib/conference'),
-    Person = require('../lib/person');
+    Person = require('../lib/person'),
+    sinon = require('sinon');
 
 describe('Conference', function() {
+    describe('step', function() {
+        it('should call applyBehaviours and step on each person', function() {
+            var c = new Conference();
+            var p1 = new Person('a', 0, 0);
+            var p2 = new Person('b', 0, 0);
+            sinon.stub(p1, 'applyBehaviours').yields();
+            sinon.stub(p1, 'step');
+            sinon.stub(p2, 'applyBehaviours').yields();
+            sinon.stub(p2, 'step');
+            c.people.push(p1);
+            c.people.push(p2);
+            c.step(function(e) {
+                assert(p1.applyBehaviours.calledOnce);
+                assert(p1.step.calledOnce);
+                assert(p2.applyBehaviours.calledOnce);
+                assert(p2.step.calledOnce);
+            });
+        });
+    });
+
     describe('getThings', function() {
         it('should return correct data', function(done) {
             var c = new Conference();
