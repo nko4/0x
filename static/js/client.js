@@ -21,29 +21,67 @@ var getIcon = function(thing) {
 
 var addToList = function(thing) {
   thing.type = thing.type || 'human';
-  $('#list').append('<li class="' + thing.type + '" id="l' + thing.id + '"><img id="i'+ thing.id + '" src="' + getImgSrc(thing) + '"></img>' + thing.name + '</li>');
+  $('#list').append('<li class="' + thing.type + '" id="l' + thing.id + '"><img id="i' + thing.id + '" src="' + getImgSrc(thing) + '"></img>' + thing.name + '</li>');
+};
+
+var firstTime = function(thing) {
+  console.log('firsttime: ' + thing.id);
+  var marker;
+  if (thing.type == 'zombie' || thing.type == 'human') {
+    marker = L.marker([thing.lat, thing.lng], {
+      icon: getIcon(thing)
+    });
+  } else {
+    marker = L.marker([thing.lat, thing.lng], {
+      draggable: true
+    });
+
+    marker.on('dragstart', function(e) {
+      e.target.thing.dragging = true;
+    });
+    marker.on('dragend', function(e) {
+      state.socket.emit('move', {
+        conference: conference,
+        id: e.target.thing.id,
+        lat: e.target._latlng.lat,
+        lng: e.target._latlng.lng
+      });
+      e.target.thing.dragging = false;
+    });
+  };
+
+  marker.thing = thing;
+  marker.thing.dragging = false;
+  state.markers[thing.id] = marker;
+  state.markers[thing.id].addTo(state.map);
+
+  $('#l' + thing.id).attr('class', thing.type);
+  $('#i' + thing.id).attr('src', getImgSrc(thing));
+};
+
+var changedType = function(thing) {
+  console.log(thing.id + ' has become a zombie');
+  $('#l' + thing.id).attr('class', thing.type);
+  $('#i' + thing.id).attr('src', getImgSrc(thing));
+  state.map.removeLayer(state.markers[thing.id]);
+  delete state.markers[thing.id];
+  return stepOne(thing);
+};
+
+var moved = function(thing) {
+  if (!state.markers[thing.id].thing.dragging) {
+    state.markers[thing.id].setLatLng([thing.lat, thing.lng]);
+    state.markers[thing.id].update();
+  }
 };
 
 var stepOne = function(thing) {
   if (!state.markers[thing.id]) {
-    var marker = L.marker([thing.lat, thing.lng], {
-      icon: getIcon(thing)
-    });
-    marker.thing = thing;
-    state.markers[thing.id] = marker;
-    state.markers[thing.id].addTo(state.map);
-    $('#l' + thing.id).attr('class', thing.type);
-    $('#i' + thing.id).attr('src', getImgSrc(thing));
+    firstTime(thing);
   } else if (state.markers[thing.id].thing.type !== thing.type) {
-    console.log(thing.id + ' has become a zombie');
-    $('#l' + thing.id).attr('class', thing.type);
-    $('#i' + thing.id).attr('src', getImgSrc(thing));
-    state.map.removeLayer(state.markers[thing.id]);
-    delete state.markers[thing.id];
-    return stepOne(thing);
+    changedType(thing);
   } else {
-    state.markers[thing.id].setLatLng([thing.lat, thing.lng]);
-    state.markers[thing.id].update();
+    moved(thing);
   }
 };
 
@@ -72,14 +110,21 @@ var details = function(details) {
 };
 
 function addStickers() {
-  state.stocket.emit('add', { type: 'sticker' });
+  state.socket.emit('add', {
+    conference: conference,
+    type: 'stickers'
+  });
 };
 
 function addBrains() {
-  state.stocket.emit('add', { type: 'brains' });
+  state.socket.emit('add', {
+    conference: conference,
+    type: 'brains'
+  });
 };
 
 $(function() {
+  //state.socket.socket.sessionid
   state.socket = io.connect();
   state.socket.on('connect', function() {
     state.socket.on('details', details);
