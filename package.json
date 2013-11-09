@@ -15,13 +15,14 @@
     "gm": "*",
     "lanyrd": "*",
     "nko": "*",
-    "ejs": "*.*.*",
-    "express": "*.*.*", 
-    "proj4" : "*.*.*",
-    "request": "*.*.*",
-    "socket.io": "*.*.*",
-    "vector2d-lib": "*.*.*",
-    "underscore": "*.*.*"
+    "ejs": "*",
+    "express": "*",
+    "node-uuid": "*", 
+    "proj4" : "*",
+    "request": "*",
+    "socket.io": "*",
+    "vector2d-lib": "*",
+    "underscore": "*"
   },
   "devDependencies": {
     "mocha": "*",
