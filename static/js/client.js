@@ -1,7 +1,8 @@
 var state = {
   map: {},
   details: {},
-  markers: {}
+  markers: {},
+  socket: {}
 };
 
 var getImgSrc = function(thing) {
@@ -70,13 +71,24 @@ var details = function(details) {
   $('#conference-name').text('Zombies at ' + details.conference.title + '!!');
 };
 
+function addStickers() {
+  state.stocket.emit('add', { type: 'sticker' });
+};
+
+function addBrains() {
+  state.stocket.emit('add', { type: 'brains' });
+};
+
 $(function() {
-  var socket = io.connect();
-  socket.on('connect', function() {
-    socket.on('details', details);
-    socket.on('step', step);
-    socket.emit('subscribe', {
+  state.socket = io.connect();
+  state.socket.on('connect', function() {
+    state.socket.on('details', details);
+    state.socket.on('step', step);
+    state.socket.emit('subscribe', {
       conference: conference
     });
   });
+
+  $('#stickers').click(addStickers);
+  $('#brains').click(addBrains);
 });
