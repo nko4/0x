@@ -28,7 +28,7 @@ var step = function(things) {
 var details = function(details) {
   state.details = details;
   
-  state.map = L.map('map').setView([details.conference.lat, details.conference.lng], 16);
+  state.map = L.map('map').setView([details.conference.location.lat, details.conference.location.lng], 16);
 
   // add an OpenStreetMap tile layer
   L.tileLayer('http://b.tile.stamen.com/toner/{z}/{x}/{y}.png', {
