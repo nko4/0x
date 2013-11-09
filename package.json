@@ -13,6 +13,14 @@
   "dependencies": {
     "nko": "*"
   },
+  "devDependencies": {
+    "mocha": "*",
+    "sinon": "*",
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-watch": "~0.5.1",
+    "grunt-cafe-mocha": "~0.1.8"
+  },
   "engines": {
     "node": "0.10.x"
   }
