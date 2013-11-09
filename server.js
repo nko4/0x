@@ -1,6 +1,7 @@
 var express = require('express'),
   app = express(),
   routes = require('./lib/routes'),
+  sockets = require('./lib/sockets'),
   server = require('http').createServer(app),
   io = require('socket.io').listen(server);
 
@@ -14,6 +15,7 @@ app.engine('html', require('ejs').renderFile);
 app.set('views', __dirname + '/views');
 
 routes.init(app);
+sockets.init(io);
 
 server.listen(port, function(e) {
   if(e) {
