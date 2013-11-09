@@ -1,9 +1,64 @@
 var assert = require('assert'),
     Conference = require('../lib/conference'),
     Person = require('../lib/person'),
-    sinon = require('sinon');
+    sinon = require('sinon'),
+    Zombie = require('../lib/zombie');
 
 describe('Conference', function() {
+    describe('zombiefy', function() {
+        it('should zombiefy a person', function() {
+            var c = new Conference();
+            var human = new Person('a', 0, 0);
+            var undead = new Person('z', 1, 1);
+            var zombie = new Zombie(undead);
+            c.people.push(human);
+            c.people.push(zombie);
+            assert.equal(c.people.length, 2);
+            assert.equal(c.people[0].getType(), 'human');
+            assert.equal(c.people[1].getType(), 'zombie');
+            c.zombiefy();
+            assert.equal(c.people.length, 2);
+            assert.equal(c.people[0].getType(), 'zombie');
+            assert.equal(c.people[1].getType(), 'zombie');
+        });
+
+        it('should zombiefy nearest person', function() {
+            var c = new Conference();
+            var human1 = new Person('a', 0, 0);
+            var human2 = new Person('a', 10, 10);
+            var undead = new Person('z', 2, 2);
+            var zombie = new Zombie(undead);
+            c.people.push(human1);
+            c.people.push(human2);
+            c.people.push(zombie);
+            assert.equal(c.people.length, 3);
+            assert.equal(c.people[0].getType(), 'human');
+            assert.equal(c.people[1].getType(), 'human');
+            assert.equal(c.people[2].getType(), 'zombie');
+            c.zombiefy();
+            assert.equal(c.people.length, 3);
+            assert.equal(c.people[0].getType(), 'human');
+            assert.equal(c.people[1].getType(), 'zombie');
+            assert.equal(c.people[2].getType(), 'zombie');
+        });
+        
+        it('should not zombiefy a person if too far away', function() {
+            var c = new Conference();
+            var human = new Person('a', 0, 0);
+            var undead = new Person('z', 3, 3);
+            var zombie = new Zombie(undead);
+            c.people.push(human);
+            c.people.push(zombie);
+            assert.equal(c.people.length, 2);
+            assert.equal(c.people[0].getType(), 'human');
+            assert.equal(c.people[1].getType(), 'zombie');
+            c.zombiefy();
+            assert.equal(c.people.length, 2);
+            assert.equal(c.people[0].getType(), 'human');
+            assert.equal(c.people[1].getType(), 'zombie');
+        });
+    });
+
     describe('step', function() {
         it('should call applyBehaviours and step on each person', function() {
             var c = new Conference();
@@ -32,7 +87,7 @@ describe('Conference', function() {
                 assert.equal(data[0].id, 'ID1');
                 assert.equal(data[0].lng.toFixed(4), -1.2397);
                 assert.equal(data[0].lat.toFixed(4), 51.7536);
-                assert.equal(data[0].type, 'person');
+                assert.equal(data[0].type, 'human');
                 return done();
             });
         });
