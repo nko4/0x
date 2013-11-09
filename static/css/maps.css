@@ -5,19 +5,18 @@ html, body, #map {
   margin:0px;
 }
 
-h1, h2, .controls {
+.controls, .header {
   position:absolute;
 }
-h1 {
-  height: 20px;
-  top: 0px;
+
+div.header {
+  padding: 5px;
+  background-color:rgba(0, 0, 0, 0.2);
+  width: 70%;
+  top: 5px;
   left: 50px;
 }
-h2 {
-  height: 15px;
-  top: 40px;
-  left: 50px;
-}
+
 div.controls {
   padding: 5px;
   width: 20%;

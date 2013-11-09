@@ -67,6 +67,7 @@ var details = function(details) {
   for (var i = 0; i < state.details.attendees.length; ++i) {
     addToList(state.details.attendees[i]);
   }
+  $('#conference-name').text(details.conference.title);
 };
 
 $(function() {
