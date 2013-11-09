@@ -37,4 +37,18 @@ describe('Person', function() {
             });
         });
     });
+
+    describe('getBehaviours', function() {
+        it('should have the random behaviour', function() {
+            var p = new Person('TEST', 1, 2);
+            var behaviours = p.getBehaviours();
+            assert.equal(behaviours.length, 1);
+            var vector = behaviours[0]();
+            var max = 10;
+            assert(vector.x >= -1 * max);
+            assert(vector.x <= max);
+            assert(vector.y >= -1 * max);
+            assert(vector.y <= max);
+        });
+    }); 
 });
