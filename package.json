@@ -11,7 +11,10 @@
     "url": "git@github.com:nko4/0x.git"
   },
   "dependencies": {
-    "nko": "*"
+    "nko": "*",
+    "ejs": "*.*.*",
+    "express": "*.*.*", 
+    "socket.io": "*.*.*"
   },
   "devDependencies": {
     "mocha": "*",

@@ -1,10 +1,42 @@
-// https://github.com/nko4/website/blob/master/module/README.md#nodejs-knockout-deploy-check-ins
-require('nko')('OsOQBZoKPwLCYTav');
+var express = require('express'),
+  app = express(),
+  routes = require('./lib/routes'),
+  sockets = require('./lib/sockets'),
+  server = require('http').createServer(app),
+  io = require('socket.io').listen(server);
 
 var isProduction = (process.env.NODE_ENV === 'production');
-var http = require('http');
 var port = (isProduction ? 80 : 8000);
 
+require('nko')('OsOQBZoKPwLCYTav');
+
+app.use(express.static(__dirname + '/static'));
+app.engine('html', require('ejs').renderFile);
+app.set('views', __dirname + '/views');
+
+routes.init(app);
+sockets.init(io);
+
+server.listen(port, function(e) {
+  if(e) {
+    console.error(e);
+    process.exit(-1);
+  }
+  
+  // RL - don't know whether we need this - leave it in for now
+  // if run as root, downgrade to the owner of this file
+  if (process.getuid() === 0) {
+    require('fs').stat(__filename, function(err, stats) {
+      if (err) { return console.error(err); }
+      process.setuid(stats.uid);
+    });
+  }
+
+  console.log('Server running at http://0.0.0.0:' + port + '/');
+} );
+
+// https://github.com/nko4/website/blob/master/module/README.md#nodejs-knockout-deploy-check-ins
+/*
 http.createServer(function (req, res) {
   // http://blog.nodeknockout.com/post/35364532732/protip-add-the-vote-ko-badge-to-your-app
   var voteko = '<iframe src="http://nodeknockout.com/iframe/0x" frameborder=0 scrolling=no allowtransparency=true width=115 height=25></iframe>';
@@ -24,3 +56,4 @@ http.createServer(function (req, res) {
 
   console.log('Server running at http://0.0.0.0:' + port + '/');
 });
+*/
