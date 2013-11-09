@@ -5,7 +5,7 @@ html, body, #map {
   margin:0px;
 }
 
-.controls, .header {
+.controls, .header, .ticker {
   position:absolute;
 }
 
@@ -16,7 +16,7 @@ div.header {
   left: 50px;
 }
 
-.header > h1 {
+.header > h1, .ticker > h4 {
   color: rgba(138, 7, 7, 0.8);
 }
 
@@ -29,8 +29,14 @@ div.controls {
   top: 5px;
   right: 5px;
 }
+div.ticker {
+  bottom: 0px;
+  left: 5px;
+}
+
 li {
 }
+
 li {
   color: white;
   font-family: 'Jolly Lodger', cursive;
