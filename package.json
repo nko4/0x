@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "async": "*",
+    "lanyrd": "*",
     "nko": "*",
     "ejs": "*.*.*",
     "express": "*.*.*", 

@@ -4,7 +4,12 @@ var state = {
   markers: {}
 };
 
-var stepOne = function(attendee) {
+var stepOne = function(thing) {
+  if(thing.type != "person") {
+    return;
+  };
+
+  var attendee = thing;
   if(!state.markers[attendee.id]) {
     state.markers[attendee.id] = L.marker([attendee.lat, attendee.lng]);
     state.markers[attendee.id].addTo(state.map);
@@ -14,9 +19,9 @@ var stepOne = function(attendee) {
   }
 };
 
-var step = function(data) {
-  for(var i=0; i<data.attendees.length; ++i) {
-    stepOne(data.attendees[i]);
+var step = function(things) {
+  for(var i=0; i<things.length; ++i) {
+    stepOne(things[i]);
   };
 };
 
