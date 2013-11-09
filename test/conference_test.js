@@ -1,17 +1,36 @@
 var assert = require('assert'),
-    Conference = require('../lib/conference');
+    Conference = require('../lib/conference'),
+    Person = require('../lib/person');
 
 describe('Conference', function() {
+    describe('getThings', function() {
+        it('should return correct data', function(done) {
+            var c = new Conference();
+            c.people.push(new Person('ID1', 5761184.398718763, -138013.54173531875));
+            c.getThings(function(e, data) {
+                assert.equal(data[0].id, 'ID1');
+                assert.equal(data[0].lng.toFixed(4), -1.2397);
+                assert.equal(data[0].lat.toFixed(4), 51.7536);
+                assert.equal(data[0].type, 'person');
+                return done();
+            });
+        });
+    });
+
     describe('init', function() {
 
-        var data = {
-            id: 'ID',
-            location: {
-                lat: 51.7536,
-                lng: -1.2397
-            },
-            people: ['PERSON1']
-        };
+        var data;
+
+        beforeEach(function() {
+            data = {
+                id: 'ID',
+                location: {
+                    lat: 51.7536,
+                    lng: -1.2397
+                },
+                people: ['PERSON1']
+            };
+        });
 
         it('should create a person for each name passed in', function(done) {
             var c = new Conference();
@@ -36,6 +55,15 @@ describe('Conference', function() {
                     lat: 51.7536,
                     lng: -1.2397
                 });
+                return done();
+            });
+        });
+
+        it('should error if no location set', function(done) {
+            var c = new Conference();
+            delete data.location;
+            c.init(data, function(e) {
+                assert.equal(e, 'no location set');
                 return done();
             });
         });

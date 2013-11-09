@@ -8,6 +8,8 @@ Conference.prototype.init = function(data, done) {
     return done();
 };
 
+Conference.prototype.getThings = sinon.stub().yields();
+
 var engine = sandbox.require('../lib/engine', {
     requires: {
         './conference': Conference
@@ -37,9 +39,15 @@ describe('engine', function() {
 
     describe('stop', function() {
         it('should destroy conference', function(done) {
-            var data1 = {id: '1'};
-            var data2 = {id: '2'};
-            var data3 = {id: '3'};
+            var data1 = {
+                id: '1'
+            };
+            var data2 = {
+                id: '2'
+            };
+            var data3 = {
+                id: '3'
+            };
 
             engine.start(data1, function() {
                 engine.start(data2, function() {
@@ -57,8 +65,23 @@ describe('engine', function() {
     });
 
     describe('step', function() {
-        it('should return positions of all people', function(done) {
-            return done();
+        it('should return positions of all people in requested conference', function(done) {
+            var stub1 = sinon.stub().yields();
+            var stub2 = sinon.stub().yields();
+
+            engine.conferences.ID1 = {
+                getThings: stub1
+            };
+
+            engine.conferences.ID2 = {
+                getThings: stub2
+            };
+
+            engine.step('ID1', function(e, data) {
+                assert(stub1.calledOnce);
+                assert(!stub2.called);
+                return done();
+            });
         });
     });
 });
