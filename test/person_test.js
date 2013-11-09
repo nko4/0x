@@ -44,7 +44,7 @@ describe('Person', function() {
             var behaviours = p.getBehaviours();
             assert.equal(behaviours.length, 1);
 
-            behaviours[0](null, function(e, force) {
+            behaviours[0](null, null, function(e, force) {
                 var max = 10;
                 assert(force.x >= -1 * max);
                 assert(force.x <= max);
