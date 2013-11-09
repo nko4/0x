@@ -1,10 +1,16 @@
 var assert = require('assert'),
+    img = require('../lib/img'),
+    sinon = require('sinon'),
   store = require('../lib/store');
 
 describe('store', function() {
   beforeEach(function() {
     store.cache = {
     };
+    sinon.stub(img, 'init').yields(null, 'ID'); 
+  });
+  afterEach(function() {
+    img.init.restore();
   });
   it.skip('should return expected for nodeconfeu', function(done) {
     var conference = {

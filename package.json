@@ -12,11 +12,13 @@
   },
   "dependencies": {
     "async": "*",
+    "gm": "*",
     "lanyrd": "*",
     "nko": "*",
     "ejs": "*.*.*",
     "express": "*.*.*", 
     "proj4" : "*.*.*",
+    "request": "*.*.*",
     "socket.io": "*.*.*",
     "vector2d-lib": "*.*.*",
     "underscore": "*.*.*"
