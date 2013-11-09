@@ -1,0 +1,38 @@
+html, body, #map {
+  height:100%;
+  width:100%;
+  padding:0px;
+  margin:0px;
+}
+
+h1, h2, .controls {
+  position:absolute;
+}
+h1 {
+  height: 20px;
+  top: 0px;
+  left: 50px;
+}
+h2 {
+  height: 15px;
+  top: 40px;
+  left: 50px;
+}
+div.controls {
+  padding: 5px;
+  width: 20%;
+  height: 95%; 
+  background-color:rgba(0, 0, 0, 0.8);
+  top: 5px;
+  right: 5px;
+}
+li {
+ font-size: 15px;
+}
+li.n {
+  color: white;
+}
+
+li.z {
+  text-decoration:line-through;
+}
