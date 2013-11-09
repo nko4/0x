@@ -23,12 +23,17 @@ describe('Conference', function() {
 
         beforeEach(function() {
             data = {
-                id: 'ID',
-                location: {
-                    lat: 51.7536,
-                    lng: -1.2397
+                conference: {
+                    id: 'ID',
+                    location: {
+                        lat: 51.7536,
+                        lng: -1.2397
+                    }
                 },
-                people: ['PERSON1']
+                attendees: [{
+                        id: 'PERSON1'
+                    }
+                ]
             };
         });
 
@@ -61,7 +66,7 @@ describe('Conference', function() {
 
         it('should error if no location set', function(done) {
             var c = new Conference();
-            delete data.location;
+            delete data.conference.location;
             c.init(data, function(e) {
                 assert.equal(e, 'no location set');
                 return done();
