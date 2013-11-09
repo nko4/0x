@@ -5,20 +5,22 @@ var state = {
 };
 
 var stepOne = function(thing) {
-  if(thing.type != "person") {
+  if (thing.type != "person") {
     return;
   };
 
   var attendee = thing;
-  if(!state.markers[attendee.id]) {
+  if (!state.markers[attendee.id]) {
     var icon = L.icon({
-      iconUrl: '/heads/' + attendee.id + '-n.jpg', 
+      iconUrl: '/heads/' + attendee.id + '-n.jpg',
       iconSize: [25, 25],
       iconAnchor: [25, 13],
       title: attendee.name
     });
-    
-    var marker = L.marker([attendee.lat, attendee.lng], {icon: icon});
+
+    var marker = L.marker([attendee.lat, attendee.lng], {
+      icon: icon
+    });
     state.markers[attendee.id] = marker;
     state.markers[attendee.id].addTo(state.map);
   } else {
@@ -28,17 +30,19 @@ var stepOne = function(thing) {
 };
 
 var step = function(things) {
-  for(var i=0; i<things.length; ++i) {
+  for (var i = 0; i < things.length; ++i) {
     stepOne(things[i]);
   };
 };
 
 var details = function(details) {
   state.details = details;
+  state.map = L.map('map').setView([details.conference.location.lat, details.conference.location.lng], 15, {
+    pan: {
+      animate: true
+    }
+  });
   
-  state.map = L.map('map').setView([details.conference.location.lat, details.conference.location.lng], 16);
-
-  // add an OpenStreetMap tile layer
   L.tileLayer('http://b.tile.stamen.com/toner/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(state.map);
