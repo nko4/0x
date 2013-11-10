@@ -1,5 +1,6 @@
 body {
   font-family: Helvetica,Arial,'Liberation Sans',FreeSans,sans-serif;
+  background:0;
 }
 
 h1, h2, h4 {
@@ -7,6 +8,14 @@ h1, h2, h4 {
   padding: 0;
   font-family: 'Jolly Lodger', cursive;
   color: #8A0707;
+}
+ 
+a {
+  color: #8A0707;
+}
+
+p {
+  font-size:18px;
 }
 
 h1 {
@@ -26,7 +35,7 @@ ul {
 }
 
 li {
-  font-size: 12px;
+  font-size: 16px;
 }
 
 .search > input {
