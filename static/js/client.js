@@ -27,10 +27,10 @@ var addToList = function(thing) {
 };
 
 var firstTime = function(thing) {
-  console.log('firsttime: ' + thing.id);
-  thing.name = state.things[thing.id].name;
+  //console.log('firsttime: ' + thing.id);
   var marker;
   if (thing.type == 'zombie' || thing.type == 'human') {
+    thing.name = state.things[thing.id].name;
     marker = L.marker([thing.lat, thing.lng], {
       icon: getIcon(thing),
       title: thing.name
@@ -93,9 +93,16 @@ var stepOne = function(thing) {
 };
 
 var step = function(things) {
+  if(state.stepping) {
+    console.log('busy...');
+    return;
+  }
+
+  state.stepping = true;
   for (var i = 0; i < things.length; ++i) {
     stepOne(things[i]);
   };
+  state.stepping = false;
 };
 
 var details = function(details) {
