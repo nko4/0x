@@ -29,7 +29,7 @@ var getIcon = function(thing) {
     icon = L.icon({
       iconUrl: getImgSrc(thing),
       iconSize: [25, 25],
-      iconAnchor: [25, 13],
+      iconAnchor: [13, 25],
       title: thing.name
     });
   }
@@ -57,7 +57,8 @@ var firstTime = function(thing) {
     marker = L.marker([thing.lat, thing.lng], {
       icon: getIcon(thing),
       draggable: true,
-      title: thing.type
+      title: thing.type,
+      zIndexOffset: -2000
     });
 
     marker.on('dragstart', function(e) {
@@ -84,16 +85,16 @@ var firstTime = function(thing) {
 };
 
 var changedType = function(thing) {
-  if(thing.type[0] == 'x') {
+  if (thing.type[0] == 'x') {
     var label = 'The zombies have smashed up the Dubstep player!'
-    if(thing.type == 'xbeer') {
+    if (thing.type == 'xbeer') {
       label = 'The humans have drunk all the free beer!';
     }
     $('.ticker > h2').text(label);
 
     state.map.removeLayer(state.markers[thing.id]);
     delete state.markers[thing.id];
-    
+
     return;
   };
 
@@ -107,8 +108,11 @@ var changedType = function(thing) {
 
 var moved = function(thing) {
   if (!state.markers[thing.id].thing.dragging) {
-    state.markers[thing.id].setLatLng([thing.lat, thing.lng]);
-    state.markers[thing.id].update();
+    if (state.markers[thing.id].thing.lat != thing.lat ||
+      state.markers[thing.id].thing.lng != thing.lng) {
+      state.markers[thing.id].setLatLng([thing.lat, thing.lng]);
+      state.markers[thing.id].update();
+    }
   }
 };
 
