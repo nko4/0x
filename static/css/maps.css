@@ -71,3 +71,10 @@ li.zombie {
   //color: #8A0707;
   text-decoration:line-through;
 }
+
+span.vote {
+  margin-top: 5px;
+  font-size: 12px;
+  color: white;
+  vertical-align: top;
+}

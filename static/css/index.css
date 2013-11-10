@@ -10,3 +10,7 @@ h6 {
   margin-top:20px;
 }
 
+p.vote {
+  vertical-align: top;
+}
+
