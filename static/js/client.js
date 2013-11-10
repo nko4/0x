@@ -88,6 +88,11 @@ var firstTime = function(thing) {
   $('#i' + thing.id).attr('src', getImgSrc(thing));
 };
 
+var zombieNoise = function() {
+ var id = '#z' + (Math.floor(Math.random() * 7) + 1);
+ $(id)[0].play();
+};
+
 var changedType = function(thing) {
   if (thing.type[0] == 'x') {
     var label = 'The zombies have smashed up the Dubstep player!'
@@ -101,13 +106,13 @@ var changedType = function(thing) {
 
     return;
   };
-
+  zombieNoise();
   $('.ticker > h2').text('Oh no, the zombies got ' + state.markers[thing.id].thing.name + '...')
   $('#l' + thing.id).attr('class', thing.type);
   $('#i' + thing.id).attr('src', getImgSrc(thing));
   state.map.removeLayer(state.markers[thing.id]);
   delete state.markers[thing.id];
-  return stepOne(thing);
+  //return stepOne(thing);
 };
 
 var moved = function(thing) {
