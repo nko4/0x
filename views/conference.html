@@ -16,10 +16,19 @@
     <link rel="stylesheet" href="/css/styles.css" />
     <link rel="stylesheet" href="/css/maps.css" />
   </head>
-  <body> 
+  <body>
+    <audio id="z1" src="/sounds/z1.mp3" ></audio> 
+    <audio id="z2" src="/sounds/z2.mp3" ></audio> 
+    <audio id="z3" src="/sounds/z3.mp3" ></audio> 
+    <audio id="z4" src="/sounds/z4.mp3" ></audio> 
+    <audio id="z5" src="/sounds/z5.mp3" ></audio> 
+    <audio id="z6" src="/sounds/z6.mp3" ></audio> 
+    <audio id="z7" src="/sounds/z7.mp3" ></audio> 
+    <audio id="no-beer-sound" src="/sounds/xbeer.mp3" ></audio> 
+    <audio id="no-dubstep-sound" src="/sounds/xdubstep.mp3" ></audio> 
     <div id="map"></div>
     <div class="header">
-      <h1 id="conference-name">&nbsp;</h1>
+      <h1 id="conference-name"></h1>
       <button class="tiny button" id="attract-humans"><i class="fa fa-beer"></i>&nbsp;Attract Humans with Free Beer</button>
       <button class="tiny button" id="attract-zombies"><i class="fa fa-music"></i>&nbsp;Attract Zombies with Dubstep</button>
     </div>
@@ -31,6 +40,9 @@
     </div>
     <div class="ticker">
       <h2 id="ticker"></h2>
+    </div>
+    <div class="waiting">
+      <h1 class="waiting">Preparing for the Apocalypse...</h1>
     </div>
     <!-- scripts -->
     <script src="http://cdn.leafletjs.com/leaflet-0.6.4/leaflet.js"></script>

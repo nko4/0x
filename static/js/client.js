@@ -88,12 +88,23 @@ var firstTime = function(thing) {
   $('#i' + thing.id).attr('src', getImgSrc(thing));
 };
 
+var zombieNoise = function() {
+ var id = '#z' + (Math.floor(Math.random() * 7) + 1);
+ $(id)[0].play();
+};
+
 var changedType = function(thing) {
+  state.markers[thing.id].thing.type = thing.type;
+
   if (thing.type[0] == 'x') {
-    var label = 'The zombies have smashed up the Dubstep player!'
+    var label = 'The zombies have smashed up the Dubstep player!';
+    var sid = '#no-dubstep-sound';
+
     if (thing.type == 'xbeer') {
       label = 'The humans have drunk all the free beer!';
+      sid = '#no-beer-sound';
     }
+    $(sid)[0].play();
     $('.ticker > h2').text(label);
 
     state.map.removeLayer(state.markers[thing.id]);
@@ -101,13 +112,13 @@ var changedType = function(thing) {
 
     return;
   };
-
+  zombieNoise();
   $('.ticker > h2').text('Oh no, the zombies got ' + state.markers[thing.id].thing.name + '...')
   $('#l' + thing.id).attr('class', thing.type);
   $('#i' + thing.id).attr('src', getImgSrc(thing));
   state.map.removeLayer(state.markers[thing.id]);
   delete state.markers[thing.id];
-  return stepOne(thing);
+  //return stepOne(thing);
 };
 
 var moved = function(thing) {
@@ -122,11 +133,11 @@ var moved = function(thing) {
 
 var stepOne = function(thing) {
   if (!state.markers[thing.id]) {
-    firstTime(thing);
-  } else if (state.markers[thing.id].thing.type !== thing.type) {
-    changedType(thing);
+    return firstTime(thing);
+  } else if (state.markers[thing.id].thing.type != 'zombie' && state.markers[thing.id].thing.type !== thing.type) {
+    return changedType(thing);
   } else {
-    moved(thing);
+    return moved(thing);
   }
 };
 
@@ -144,6 +155,10 @@ var step = function(things) {
 };
 
 var details = function(details) {
+  $('.waiting').hide();
+  $('.header').show();
+  $('.controls').show();
+  $('.ticker').show();
   state.details = details;
   state.map = L.map('map').setView([details.conference.location.lat, details.conference.location.lng], 15, {
     pan: {
