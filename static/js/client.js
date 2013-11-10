@@ -94,6 +94,8 @@ var zombieNoise = function() {
 };
 
 var changedType = function(thing) {
+  state.markers[thing.id].thing.type = thing.type;
+
   if (thing.type[0] == 'x') {
     var label = 'The zombies have smashed up the Dubstep player!'
     if (thing.type == 'xbeer') {
@@ -126,12 +128,18 @@ var moved = function(thing) {
 };
 
 var stepOne = function(thing) {
+  
+  // make sure zombies stay zombies whatever!
+  //if(state.markers[thing.id].type == 'zombie') {
+  //  thing.type = 'zombie';
+  //}
+
   if (!state.markers[thing.id]) {
-    firstTime(thing);
-  } else if (state.markers[thing.id].thing.type !== thing.type) {
-    changedType(thing);
+    return firstTime(thing);
+  } else if (state.markers[thing.id].thing.type != 'zombie' && state.markers[thing.id].thing.type !== thing.type) {
+    return changedType(thing);
   } else {
-    moved(thing);
+    return moved(thing);
   }
 };
 
