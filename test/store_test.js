@@ -5,14 +5,12 @@ var assert = require('assert'),
 
 describe('store', function() {
   beforeEach(function() {
-    store.cache = {
-    };
     sinon.stub(img, 'init').yields(null, 'ID'); 
   });
   afterEach(function() {
     img.init.restore();
   });
-  it('should return expected for nodeconfeu', function(done) {
+  it.skip('should return expected for nodeconfeu', function(done) {
     var conference = {
       id: 'nodeconfeu:2013',
       slug: 'nodeconfeu',
@@ -27,7 +25,7 @@ describe('store', function() {
       return done(e);
     });
   });
-  it('should return expected for jsconfeu', function(done) {
+  it.skip('should return expected for jsconfeu', function(done) {
     var conference = {
       id: 'jsconfeu:2013',
       slug: 'jsconfeu',
