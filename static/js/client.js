@@ -12,12 +12,29 @@ var getImgSrc = function(thing) {
 }
 
 var getIcon = function(thing) {
-  return L.icon({
-    iconUrl: getImgSrc(thing),
-    iconSize: [25, 25],
-    iconAnchor: [25, 13],
-    title: thing.name
-  });
+  var icon;
+  if (thing.type == 'beer') {
+    icon = L.AwesomeMarkers.icon({
+      icon: 'beer',
+      prefix: 'fa',
+      markerColor: 'green'
+    });
+  } else if (thing.type == 'dubstep') {
+    icon = L.AwesomeMarkers.icon({
+      icon: 'music',
+      prefix: 'fa',
+      markerColor: '#8A0707'
+    });
+  } else {
+    icon = L.icon({
+      iconUrl: getImgSrc(thing),
+      iconSize: [25, 25],
+      iconAnchor: [25, 13],
+      title: thing.name
+    });
+  }
+
+  return icon;;
 }
 
 var addToList = function(thing) {
@@ -29,6 +46,7 @@ var addToList = function(thing) {
 var firstTime = function(thing) {
   //console.log('firsttime: ' + thing.id);
   var marker;
+
   if (thing.type == 'zombie' || thing.type == 'human') {
     thing.name = state.things[thing.id].name;
     marker = L.marker([thing.lat, thing.lng], {
@@ -36,9 +54,8 @@ var firstTime = function(thing) {
       title: thing.name
     });
   } else {
-    //todo set draggable based upon id
-    //state.socket.socket.sessionid
     marker = L.marker([thing.lat, thing.lng], {
+      icon: getIcon(thing),
       draggable: true,
       title: thing.type
     });
@@ -93,7 +110,7 @@ var stepOne = function(thing) {
 };
 
 var step = function(things) {
-  if(state.stepping) {
+  if (state.stepping) {
     console.log('busy...');
     return;
   }
@@ -120,20 +137,22 @@ var details = function(details) {
   for (var i = 0; i < state.details.attendees.length; ++i) {
     addToList(state.details.attendees[i]);
   }
+
   $('#conference-name').text('Zombies at ' + details.conference.title + '!!');
+  state.socket.on('step', step);
 };
 
-function addStickers() {
+function addHumanInfluencer() {
   state.socket.emit('add', {
     conference: conference,
-    type: 'stickers'
+    type: 'beer'
   });
 };
 
-function addBrains() {
+function addZombieInfluencer() {
   state.socket.emit('add', {
     conference: conference,
-    type: 'brains'
+    type: 'dubstep'
   });
 };
 
@@ -141,12 +160,11 @@ $(function() {
   state.socket = io.connect();
   state.socket.on('connect', function() {
     state.socket.on('details', details);
-    state.socket.on('step', step);
     state.socket.emit('subscribe', {
       conference: conference
     });
   });
 
-  $('#stickers').click(addStickers);
-  $('#brains').click(addBrains);
+  $('#attract-humans').click(addHumanInfluencer);
+  $('#attract-zombies').click(addZombieInfluencer);
 });
