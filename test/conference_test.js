@@ -1,11 +1,41 @@
 var assert = require('assert'),
     Conference = require('../lib/conference'),
+    Human = require('../lib/human'),
     Influencer = require('../lib/influencer'),
     Person = require('../lib/person'),
     sinon = require('sinon'),
     Zombie = require('../lib/zombie');
 
 describe('Conference', function() {
+    describe('checkForInfluencerExpiration', function() {
+        it('should delete influencer when people arrive', function(done) {
+            var influencer = { id: 'ID1', type: 'dubstep' };
+            var c = new Conference();
+            c.EPSG3857 = { x: 0, y: 0 }; 
+            c.add(influencer, function() {
+                var x = c.influencers[0].location.x;
+                var y = c.influencers[0].location.y;
+                
+                c.people.push(new Human('H1', x+1, y+1));
+                c.people.push(new Human('H2', x+1, y+1));
+                c.people.push(new Human('H3', x+1, y+1));
+                c.people.push(new Human('H4', x+1, y+1));
+                c.people.push(new Human('H5', x+1, y+1));
+                c.people.push(new Human('H6', x+1, y+1));
+                c.people.push(new Human('H7', x+1, y+1));
+                c.people.push(new Human('H8', x+1, y+1));
+                c.people.push(new Human('H9', x+1, y+1));
+                c.people.push(new Human('H10', x+1, y+1));
+
+                c.checkForInfluencerExpiration(function() {
+                    assert.equal(c.influencers.length, 1);
+                    assert.equal(c.influencers[0].getType(), 'xdubstep');
+                    return done();
+                });
+            });
+        });
+    });
+
     describe('zombiefy', function() {
         it('should zombiefy a person', function() {
             var c = new Conference();

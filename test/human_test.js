@@ -8,7 +8,7 @@ describe('human', function() {
             var p = new Person('TEST', 1, 2);
             var h = new Human(p);
             var behaviours = h.getBehaviours();
-            assert.equal(behaviours.length, 2);
+            assert.equal(behaviours.length, 3);
         });
     });
 });

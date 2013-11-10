@@ -4,7 +4,7 @@ var assert = require('assert'),
 
 describe('zombie', function() {
     describe('getBehaviours', function() {
-        it('should have three behaviours', function() {
+        it('should have behaviours', function() {
             var p = new Person('TEST', 1, 2);
             var z = new Zombie(p);
             var behaviours = z.getBehaviours();
