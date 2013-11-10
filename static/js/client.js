@@ -128,12 +128,6 @@ var moved = function(thing) {
 };
 
 var stepOne = function(thing) {
-  
-  // make sure zombies stay zombies whatever!
-  //if(state.markers[thing.id].type == 'zombie') {
-  //  thing.type = 'zombie';
-  //}
-
   if (!state.markers[thing.id]) {
     return firstTime(thing);
   } else if (state.markers[thing.id].thing.type != 'zombie' && state.markers[thing.id].thing.type !== thing.type) {
@@ -157,6 +151,10 @@ var step = function(things) {
 };
 
 var details = function(details) {
+  $('.waiting').hide();
+  $('.header').show();
+  $('.controls').show();
+  $('.ticker').show();
   state.details = details;
   state.map = L.map('map').setView([details.conference.location.lat, details.conference.location.lng], 15, {
     pan: {
