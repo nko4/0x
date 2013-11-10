@@ -47,6 +47,10 @@ var firstTime = function(thing) {
   //console.log('firsttime: ' + thing.id);
   var marker;
 
+  if(thing.type[0] == 'x') {
+    return;
+  }
+
   if (thing.type == 'zombie' || thing.type == 'human') {
     thing.name = state.things[thing.id].name;
     marker = L.marker([thing.lat, thing.lng], {
