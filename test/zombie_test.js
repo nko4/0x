@@ -4,11 +4,11 @@ var assert = require('assert'),
 
 describe('zombie', function() {
     describe('getBehaviours', function() {
-        it('should have two behaviours', function() {
+        it('should have three behaviours', function() {
             var p = new Person('TEST', 1, 2);
             var z = new Zombie(p);
             var behaviours = z.getBehaviours();
-            assert.equal(behaviours.length, 2);
+            assert.equal(behaviours.length, 3);
         });
 
         it('should not error when everyone is a zombie', function(done) {
