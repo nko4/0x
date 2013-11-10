@@ -1,5 +1,6 @@
 var assert = require('assert'),
     Conference = require('../lib/conference'),
+    Influencer = require('../lib/influencer'),
     Person = require('../lib/person'),
     sinon = require('sinon'),
     Zombie = require('../lib/zombie');
@@ -83,11 +84,16 @@ describe('Conference', function() {
         it('should return correct data', function(done) {
             var c = new Conference();
             c.people.push(new Person('ID1', 5761184.398718763, -138013.54173531875));
+            c.influencers.push(new Influencer('ID2', 'brains', 5846833.6149351075, 1506841.8246246541));
             c.getThings(function(e, data) {
                 assert.equal(data[0].id, 'ID1');
                 assert.equal(data[0].lng.toFixed(4), -1.2397);
                 assert.equal(data[0].lat.toFixed(4), 51.7536);
                 assert.equal(data[0].type, 'human');
+                assert.equal(data[1].id, 'ID2');
+                assert.equal(data[1].lng.toFixed(3), 13.412);
+                assert.equal(data[1].lat.toFixed(3), 52.523);
+                assert.equal(data[1].type, 'brains');
                 return done();
             });
         });
