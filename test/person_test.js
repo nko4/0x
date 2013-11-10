@@ -6,12 +6,15 @@ var assert = require('assert'),
 describe('Person', function() {
     describe('constructor', function() {
         it('should set initialise', function() {
-            var p = new Person('TEST', 42, 84);
+            var p = new Person('TEST', 42, 84, 5);
             assert.equal(p.location.x, 42);
             assert.equal(p.location.y, 84);
             assert.equal(p.maxspeed, 5);
             assert.deepEqual(p.acceleration, new vector(0, 0));
             assert.deepEqual(p.velocity, new vector(0, 0));
+            var p2 = new Person('TEST', 42, 84);
+            assert(p2.maxspeed >= 1);
+            assert(p2.maxspeed <= 5);
         });
     });
 
