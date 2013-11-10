@@ -6,12 +6,15 @@ var assert = require('assert'),
 describe('Person', function() {
     describe('constructor', function() {
         it('should set initialise', function() {
-            var p = new Person('TEST', 42, 84);
+            var p = new Person('TEST', 42, 84, 5);
             assert.equal(p.location.x, 42);
             assert.equal(p.location.y, 84);
             assert.equal(p.maxspeed, 5);
             assert.deepEqual(p.acceleration, new vector(0, 0));
             assert.deepEqual(p.velocity, new vector(0, 0));
+            var p2 = new Person('TEST', 42, 84);
+            assert(p2.maxspeed >= 1);
+            assert(p2.maxspeed <= 5);
         });
     });
 
@@ -31,7 +34,7 @@ describe('Person', function() {
             p.getBehaviours = function() {
                 return [stub];
             };
-            p.applyBehaviours(null, function(e) {
+            p.applyBehaviours(null, null, function(e) {
                 assert(stub.calledOnce);
                 return done();
             });
@@ -44,7 +47,7 @@ describe('Person', function() {
             var behaviours = p.getBehaviours();
             assert.equal(behaviours.length, 1);
 
-            behaviours[0](null, null, function(e, force) {
+            behaviours[0](null, null, null, function(e, force) {
                 var max = 10;
                 assert(force.x >= -1 * max);
                 assert(force.x <= max);

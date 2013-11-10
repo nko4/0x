@@ -1,5 +1,6 @@
 var assert = require('assert'),
     Conference = require('../lib/conference'),
+    Influencer = require('../lib/influencer'),
     Person = require('../lib/person'),
     sinon = require('sinon'),
     Zombie = require('../lib/zombie');
@@ -83,11 +84,36 @@ describe('Conference', function() {
         it('should return correct data', function(done) {
             var c = new Conference();
             c.people.push(new Person('ID1', 5761184.398718763, -138013.54173531875));
+            c.influencers.push(new Influencer('ID2', 'brains', 5846833.6149351075, 1506841.8246246541));
             c.getThings(function(e, data) {
                 assert.equal(data[0].id, 'ID1');
                 assert.equal(data[0].lng.toFixed(4), -1.2397);
                 assert.equal(data[0].lat.toFixed(4), 51.7536);
                 assert.equal(data[0].type, 'human');
+                assert.equal(data[1].id, 'ID2');
+                assert.equal(data[1].lng.toFixed(3), 13.412);
+                assert.equal(data[1].lat.toFixed(3), 52.523);
+                assert.equal(data[1].type, 'brains');
+                return done();
+            });
+        });
+    });
+
+    describe('add', function() {
+        it('should add an influencer at a random location within boundary', function(done) {
+            var influencer = { id: 'ID1', type: 'brains' };
+            var c = new Conference();
+            c.EPSG3857 = { x: 0, y: 0 }; 
+            c.add(influencer, function() {
+                var xBoundary = 1000; // metres
+                var yBoundary = 1000; // metres
+                // EPSG:3857
+                var oxX = 0;
+                var oxY = 0;
+                assert(c.influencers[0].location.x < oxX + xBoundary);
+                assert(c.influencers[0].location.x > oxX - xBoundary);
+                assert(c.influencers[0].location.y < oxY + yBoundary);
+                assert(c.influencers[0].location.y > oxY - yBoundary);
                 return done();
             });
         });
