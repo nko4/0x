@@ -38,11 +38,18 @@ var firstTime = function(thing) {
   } else {
     //todo set draggable based upon id
     //state.socket.socket.sessionid
+    //
+    var icon = L.AwesomeMarkers.icon({
+        icon: 'coffee',
+        markerColor: 'red'
+    });
+   
     marker = L.marker([thing.lat, thing.lng], {
+      //icon: icon,
       draggable: true,
       title: thing.type
     });
-
+   
     marker.on('dragstart', function(e) {
       e.target.thing.dragging = true;
     });
@@ -123,17 +130,17 @@ var details = function(details) {
   $('#conference-name').text('Zombies at ' + details.conference.title + '!!');
 };
 
-function addStickers() {
+function addHumanInfluencer() {
   state.socket.emit('add', {
     conference: conference,
-    type: 'stickers'
+    type: 'beer'
   });
 };
 
-function addBrains() {
+function addZombieInfluencer() {
   state.socket.emit('add', {
     conference: conference,
-    type: 'brains'
+    type: 'dubstep'
   });
 };
 
@@ -147,6 +154,6 @@ $(function() {
     });
   });
 
-  $('#stickers').click(addStickers);
-  $('#brains').click(addBrains);
+  $('#attract-humans').click(addHumanInfluencer);
+  $('#attract-zombies').click(addZombieInfluencer);
 });
