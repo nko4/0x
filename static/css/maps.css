@@ -9,6 +9,10 @@ html, body, #map {
   position:absolute;
 }
 
+h1 {
+  font-size: 45px;
+}
+
 div.header {
   padding: 0;
   width: 70%;
