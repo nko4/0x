@@ -97,10 +97,14 @@ var changedType = function(thing) {
   state.markers[thing.id].thing.type = thing.type;
 
   if (thing.type[0] == 'x') {
-    var label = 'The zombies have smashed up the Dubstep player!'
+    var label = 'The zombies have smashed up the Dubstep player!';
+    var sid = '#no-dubstep-sound';
+
     if (thing.type == 'xbeer') {
       label = 'The humans have drunk all the free beer!';
+      sid = '#no-beer-sound';
     }
+    $(sid)[0].play();
     $('.ticker > h2').text(label);
 
     state.map.removeLayer(state.markers[thing.id]);
