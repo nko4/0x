@@ -119,6 +119,27 @@ describe('Conference', function() {
         });
     });
 
+    describe('move', function() {
+        it('should move influencer', function(done) {
+            var influencer = { id: 'ID1', type: 'brains' };
+            var c = new Conference();
+            c.EPSG3857 = { x: 0, y: 0 }; 
+            c.add(influencer, function() {
+                var initialX = c.influencers[0].location.x;
+                var initialY = c.influencers[0].location.y;
+                
+                var data = { id: 'ID1', lat: 51.7536, lng: -1.2397 };
+                c.move(data, function() {
+                    var newX = c.influencers[0].location.x;
+                    var newY = c.influencers[0].location.y;
+                    assert.equal(newX,  5761184.398718763);
+                    assert.equal(newY, -138013.54173531875);
+                    return done();
+                });
+            });
+        });
+    });
+
     describe('init', function() {
 
         var data;
