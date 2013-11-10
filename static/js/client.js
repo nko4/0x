@@ -84,7 +84,20 @@ var firstTime = function(thing) {
 };
 
 var changedType = function(thing) {
-  $('.ticker > h2').text('Oh no, they got ' + state.markers[thing.id].thing.name + '...')
+  if(thing.type[0] == 'x') {
+    var label = 'The zombies have smashed up the Dubstep player!'
+    if(thing.type == 'xbeer') {
+      label = 'The humans have drunk all the free beer!';
+    }
+    $('.ticker > h2').text(label);
+
+    state.map.removeLayer(state.markers[thing.id]);
+    delete state.markers[thing.id];
+    
+    return;
+  };
+
+  $('.ticker > h2').text('Oh no, the zombies got ' + state.markers[thing.id].thing.name + '...')
   $('#l' + thing.id).attr('class', thing.type);
   $('#i' + thing.id).attr('src', getImgSrc(thing));
   state.map.removeLayer(state.markers[thing.id]);
