@@ -93,6 +93,26 @@ describe('Conference', function() {
         });
     });
 
+    describe('add', function() {
+        it('should add an influencer at a random location within boundary', function(done) {
+            var influencer = { id: 'ID1', type: 'brains' };
+            var c = new Conference();
+            c.EPSG3857 = { x: 0, y: 0 }; 
+            c.add(influencer, function() {
+                var xBoundary = 1000; // metres
+                var yBoundary = 1000; // metres
+                // EPSG:3857
+                var oxX = 0;
+                var oxY = 0;
+                assert(c.influencers[0].location.x < oxX + xBoundary);
+                assert(c.influencers[0].location.x > oxX - xBoundary);
+                assert(c.influencers[0].location.y < oxY + yBoundary);
+                assert(c.influencers[0].location.y > oxY - yBoundary);
+                return done();
+            });
+        });
+    });
+
     describe('init', function() {
 
         var data;

@@ -20,7 +20,7 @@ describe('zombie', function() {
             people.push(zz);
             people.push(z);
             var behaviours = z.getBehaviours();
-            behaviours[0](z, people, function(e) {
+            behaviours[0](z, people, null, function(e) {
                 assert.equal(e, null);
                 return done();
             });
