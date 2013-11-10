@@ -1,6 +1,5 @@
 body {
   font-family: Helvetica,Arial,'Liberation Sans',FreeSans,sans-serif;
-  font-size: 20px;
 }
 
 h1, h2 {
@@ -16,4 +15,13 @@ h1 {
 
 h2 {
   font-size: 40px;
+}
+
+.search > input {
+  width: 400px;
+  display: inline-block;
+}
+
+.search {
+  display: none;
 }
