@@ -14,10 +14,11 @@ h1 {
 }
 
 div.header {
-  padding: 0;
-  width: 70%;
+  padding-left: 10px;
+  padding-right: 10px;
   top: 5px;
   left: 50px;
+  background-color:rgba(0, 0, 0, 0.2);
 }
 
 .header > h1, .ticker > h4 {
@@ -34,8 +35,10 @@ div.controls {
   right: 5px;
 }
 div.ticker {
+  padding: 5px;
   bottom: 0px;
   left: 5px;
+  background-color:rgba(0, 0, 0, 0.2);
 }
 
 li {
