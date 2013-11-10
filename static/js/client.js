@@ -151,7 +151,7 @@ var details = function(details) {
     addToList(state.details.attendees[i]);
   }
 
-  $('#conference-name').text('Zombies at ' + details.conference.title + '!!');
+  $('#conference-name').text('Zombies at ' + details.conference.title + ' !!');
   state.socket.on('step', step);
 };
 
