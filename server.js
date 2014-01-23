@@ -8,7 +8,7 @@ var express = require('express'),
 var isProduction = (process.env.NODE_ENV === 'production');
 var port = (process.env.PORT || isProduction ? 80 : 8000);
 
-require('nko')('OsOQBZoKPwLCYTav');
+//require('nko')('OsOQBZoKPwLCYTav');
 
 app.use(express.static(__dirname + '/static'));
 app.engine('html', require('ejs').renderFile);
