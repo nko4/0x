@@ -6,7 +6,7 @@ var express = require('express'),
   io = require('socket.io').listen(server);
 
 var isProduction = (process.env.NODE_ENV === 'production');
-var port = (isProduction ? 80 : 8000);
+var port = (process.env.PORT || isProduction ? 80 : 8000);
 
 require('nko')('OsOQBZoKPwLCYTav');
 
