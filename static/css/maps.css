@@ -59,8 +59,9 @@ div.ticker {
 
 li {
   color: white;
-  font-family: 'Jolly Lodger', cursive;
-  font-size: 20px;
+  font-family: 'Francois One', cursive;
+  font-weight: 400;
+  font-size: 16px;
 }
 li > img {
   height: 20px;
@@ -68,7 +69,6 @@ li > img {
   margin-right: 10px;
 }
 li.zombie { 
-  //color: #8A0707;
   text-decoration:line-through;
 }
 
