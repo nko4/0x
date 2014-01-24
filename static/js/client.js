@@ -7,8 +7,7 @@ var state = {
 };
 
 var getImgSrc = function(thing) {
-  var ext = thing.type == "zombie" ? "-z.jpg" : "-n.jpg";
-  return '/heads/' + thing.id + ext;
+  return '/heads?id=' + thing.id + '&type=' + thing.type;
 }
 
 var getIcon = function(thing) {
