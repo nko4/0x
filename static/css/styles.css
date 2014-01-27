@@ -1,15 +1,18 @@
-html { 
+html {
+    background-color:  #3E390C;
     background: url(/img/didcot.jpg) no-repeat center center fixed; 
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
+    height: 100%;
 }
 
 body {
   font-family: 'Francois One', Helvetica,Arial,'Liberation Sans',FreeSans,sans-serif;
   background: 0;
   color: #BDB58E;
+  margin: 20px;
 }
 
 .row {
