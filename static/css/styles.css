@@ -1,10 +1,20 @@
-html {
-  background-color: #BDB58E;
+html { 
+    background: url(/img/didcot.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
 }
 
 body {
   font-family: 'Francois One', Helvetica,Arial,'Liberation Sans',FreeSans,sans-serif;
-  background:0;
+  background: 0;
+  color: #BDB58E;
+}
+
+.row {
+  padding: 5px;
+  background-color:rgba(0, 0, 0, 0.6);
 }
 
 audio {
@@ -12,11 +22,11 @@ audio {
 }
 
 h1, h2, h4 {
+  color: #F0E3AC;
   margin: 0;
   padding: 0;
   font-family: 'wfregular', cursive;
   font-weight: 400;
-  color: #1F1B10;
 }
 
 #big {
@@ -32,7 +42,7 @@ h1 {
 }
  
 a, a:visited {
-  color: #1F1B10;
+  color: #BDB58E;
   text-decoration: underline; 
 }
 
