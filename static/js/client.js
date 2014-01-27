@@ -7,7 +7,7 @@ var state = {
 };
 
 var getImgSrc = function(thing) {
-  return '/heads?v=1&id=' + thing.id + '&type=' + thing.type;
+  return '/heads?v=2&id=' + thing.id;
 }
 
 var getIcon = function(thing) {
@@ -29,17 +29,18 @@ var getIcon = function(thing) {
       iconUrl: getImgSrc(thing),
       iconSize: [25, 25],
       iconAnchor: [13, 25],
-      title: thing.name
+      title: thing.name,
+      className: thing.type
     });
   }
 
-  return icon;;
+  return icon;
 }
 
 var addToList = function(thing) {
   thing.type = thing.type || 'human';
   state.things[thing.id] = thing;
-  $('#list').append('<li class="' + thing.type + '" id="l' + thing.id + '"><img id="i' + thing.id + '" src="' + getImgSrc(thing) + '"></img>' + thing.name + '</li>');
+  $('#list').append('<li class="' + thing.type + '" id="l' + thing.id + '"><img class="' + thing.type + '" id="i' + thing.id + '" src="' + getImgSrc(thing) + '"></img>' + thing.name + '</li>');
 };
 
 var firstTime = function(thing) {
