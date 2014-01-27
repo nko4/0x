@@ -7,7 +7,7 @@ var state = {
 };
 
 var getImgSrc = function(thing) {
-  return '/heads?id=' + thing.id + '&type=' + thing.type;
+  return '/heads?v=1&id=' + thing.id + '&type=' + thing.type;
 }
 
 var getIcon = function(thing) {
